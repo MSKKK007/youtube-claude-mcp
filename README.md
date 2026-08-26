@@ -48,7 +48,16 @@ npm run build
 
 ## Production Environment
 
-Required production variables:
+Minimum Railway test variables:
+
+```bash
+YOUTUBE_API_KEY=...
+AUTH_MODE=none
+```
+
+Redis is recommended, but the app can boot without it and will use an in-process no-op cache.
+
+Full production variables:
 
 ```bash
 NODE_ENV=production
@@ -80,6 +89,22 @@ CHANNEL_VIDEOS_CACHE_TTL_SECONDS=600
 6. Configure Claude.ai custom connector OAuth advanced settings with the appropriate Auth0 client details.
 
 The `/mcp` endpoint requires a valid `Authorization: Bearer <token>` when `AUTH_MODE=oauth`.
+
+## Railway Deployment
+
+1. Push the repository to GitHub.
+2. Create a Railway project from the GitHub repository.
+3. Railway should use the checked-in Dockerfile via `railway.json`.
+4. Add service variables:
+
+```bash
+YOUTUBE_API_KEY=...
+AUTH_MODE=none
+```
+
+5. Deploy and open `/health`.
+6. Add Railway Redis later if you want shared caching, then set `REDIS_URL`.
+7. Switch to Auth0 by setting `AUTH_MODE=oauth` and the Auth0 variables.
 
 ## Render Deployment
 

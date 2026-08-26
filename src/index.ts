@@ -50,5 +50,6 @@ async function main(): Promise<void> {
 
 main().catch((error) => {
   logger.error({ err: error }, "startup failed");
+  console.error(`startup failed: ${error instanceof Error ? error.message : String(error)}`);
   process.exit(1);
 });

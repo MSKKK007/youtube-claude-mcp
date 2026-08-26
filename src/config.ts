@@ -26,7 +26,7 @@ export function loadConfig(): Config {
     port: readInt("PORT", DEFAULT_PORT),
     youtubeApiKey: blankToUndefined(process.env.YOUTUBE_API_KEY) ?? "",
     youtubeTimeoutMs: readInt("YOUTUBE_TIMEOUT_MS", DEFAULT_TIMEOUT_MS),
-    authMode: (blankToUndefined(process.env.AUTH_MODE) ?? "oauth") as Config["authMode"],
+    authMode: (blankToUndefined(process.env.AUTH_MODE) ?? "none") as Config["authMode"],
     authRequiredScope: blankToUndefined(process.env.AUTH_REQUIRED_SCOPE) ?? "youtube:read",
     cacheTtls: {
       transcriptSeconds: readInt("TRANSCRIPT_CACHE_TTL_SECONDS", 604_800),
@@ -63,9 +63,6 @@ export function validateConfig(config: Config): Config {
     if (!config.authIssuer) throw new Error("AUTH_ISSUER is required when AUTH_MODE=oauth");
     if (!config.authAudience) throw new Error("AUTH_AUDIENCE is required when AUTH_MODE=oauth");
     if (!config.authJwksUrl) throw new Error("AUTH_JWKS_URL is required when AUTH_MODE=oauth");
-  }
-  if (config.nodeEnv === "production" && !config.redisUrl) {
-    throw new Error("REDIS_URL is required in production");
   }
   return config;
 }

@@ -1,0 +1,12 @@
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+MCP_for_Any_Web_App_End_to_End_Beginner_Guide.docx
+YouTube_MCP_Claude_AI_Project_Implementation_Blueprint.docx
+.env
+.~lock.YouTube_MCP_Claude_AI_Project_Implementation_Blueprint.docx#
